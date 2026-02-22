@@ -4,7 +4,7 @@ Real-time recognition of British Sign Language (BSL) finger spelling using compu
 
 ## Plan
 - Phase 1:
-  - Capture camera input (DONE)
+  - Capture camera input ✅
   - Detect hand
   - Extract and visualise features
 - Phase 2:
