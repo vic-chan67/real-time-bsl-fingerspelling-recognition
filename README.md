@@ -5,6 +5,7 @@ Real-time recognition of British Sign Language (BSL) finger spelling using compu
 ## Setup
 The program is designed to be fully executable at any stage in the plan, whether that be just the camera working or displaying the full predictions in real-time.
 
+### Instructions
 1. Clone repository
 2. Activate virtual environment - **macOS/Linux:** `source backend/.venv/bin/activate` | **Windows (cmd prompt):** `backend\.venv\Scripts\activate.bat`
 3. Install dependencies: `pip install -r requirements.txt`
