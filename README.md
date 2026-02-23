@@ -3,7 +3,7 @@
 Real-time recognition of British Sign Language (BSL) finger spelling using computer vision and machine learning techniques. Aims to help BSL learners make sure their finger spelling is correct without requiring a third-party person to confirm, allowing learning from home with no personal tutor. Real-time recognition ensures immediate feedback without delays to speed up learning. 
 
 ## Setup
-The program is designed to be fully executable at any stage in the phase, whether that be just the working camera input or displaying the full predictions in real-time.
+The program is designed to be fully executable at any stage in the plan, whether that be just the camera working or displaying the full predictions in real-time.
 
 1. Clone repository
 2. Activate virtual environment - **macOS/Linux:** `source backend/.venv/bin/activate` | **Windows (cmd prompt):** `backend\.venv\Scripts\activate.bat`
