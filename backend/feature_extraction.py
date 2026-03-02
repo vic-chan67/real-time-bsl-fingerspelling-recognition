@@ -5,8 +5,8 @@ import numpy as np
 import cv2  # opencv
 import mediapipe as mp
 
-# woman_hands.jpg from https://storage.googleapis.com/mediapipe-tasks/hand_landmarker/woman_hands.jpg
-image = cv2.imread('/Users/dev/Documents/real-time-bsl-fingerspelling-recognition/backend/woman_hands.jpg')
+# ../assets/woman_hands.jpg from https://storage.googleapis.com/mediapipe-tasks/hand_landmarker/woman_hands.jpg
+image = cv2.imread('/Users/dev/Documents/real-time-bsl-fingerspelling-recognition/assets/woman_hands.jpg')
 if image is None:
     print("Image failed to load")
 image1 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -32,5 +32,15 @@ if results.multi_hand_landmarks:
         mp_draw.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
         landmarks = hand_landmarks.landmark
-        print(f"Number of landmarks: {len(landmarks)}")
+
+        wrist = landmarks[0]
+        wrist_x, wrist_y, wrist_z = wrist.x, wrist.y, wrist.z
+        print(f"\nWRIST COORDS: {wrist_x} {wrist_y} {wrist_z}")
+
+        for i, landmark in enumerate(landmarks):
+            # Get all coords relative to WRIST
+            rel_x = landmark.x - wrist_x
+            rel_y = landmark.y - wrist_y
+            rel_z = landmark.z - wrist_z
+            print(f"\nRELATIVE COORDS for {landmark}: {rel_x} {rel_y} {rel_z}")
         
