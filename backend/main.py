@@ -1,5 +1,5 @@
 import numpy as np
-import cv2 as cv
+import cv2  # opencv
 import mediapipe as mp
 
 # .hands: hand detection/tracking
@@ -16,7 +16,7 @@ hands = mp_hands.Hands(
 )
 
 # Open default camera (only change if more than one camera source)
-capture = cv.VideoCapture(0)
+capture = cv2.VideoCapture(0)
 if not capture.isOpened():  # check camera open
     print("Cannot open camera")
     exit()
@@ -29,12 +29,12 @@ while True:
     
     # Preprocessing:
     # Flip image (mirrors hands), colour change BGR (openCV) to RGB (mediapipe)
-    image = cv.cvtColor(cv.flip(frame, 1), cv.COLOR_BGR2RGB)
+    image = cv2.cvtColor(cv2.flip(frame, 1), cv2.COLOR_BGR2RGB)
     
     image.flags.writeable = False  # stop numpy copying image
 
     results = hands.process(image)
-    image = cv.cvtColor(image, cv.COLOR_RGB2BGR)  # colour change back to BGR (openCV)
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # colour change back to BGR (openCV)
 
     # Draw hand landmarks
     if results.multi_hand_landmarks:
@@ -42,9 +42,9 @@ while True:
             mp_draw.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
     # Display
-    cv.imshow('Show hand landmarks', image)
-    if cv.waitKey(1) == ord('q'):
+    cv2.imshow('Show hand landmarks', image)
+    if cv2.waitKey(1) == ord('q'):
         break
 
 capture.release()
-cv.destroyAllWindows()
+cv2.destroyAllWindows()
