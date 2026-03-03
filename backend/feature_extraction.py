@@ -4,6 +4,8 @@
 import numpy as np
 import cv2  # opencv
 import mediapipe as mp
+import math
+from landmark_names import landmark_names
 
 # ../assets/woman_hands.jpg from https://storage.googleapis.com/mediapipe-tasks/hand_landmarker/woman_hands.jpg
 image = cv2.imread('/Users/dev/Documents/real-time-bsl-fingerspelling-recognition/assets/woman_hands.jpg')
@@ -33,14 +35,21 @@ if results.multi_hand_landmarks:
 
         landmarks = hand_landmarks.landmark
 
+        # Get WRIST and MIDDLE_FINGER_TIP coords
         wrist = landmarks[0]
         wrist_x, wrist_y, wrist_z = wrist.x, wrist.y, wrist.z
-        print(f"\nWRIST COORDS: {wrist_x} {wrist_y} {wrist_z}")
+        middleTip = landmarks[12]
+        middleTip_x, middleTip_y, middleTip_z = middleTip.x, middleTip.y, middleTip.z
+        
+        # Normalisation
+        scale = math.sqrt((middleTip_x-wrist_x)**2 + (middleTip_y-wrist_y)**2 + (middleTip_z-wrist_z)**2)
 
         for i, landmark in enumerate(landmarks):
             # Get all coords relative to WRIST
             rel_x = landmark.x - wrist_x
             rel_y = landmark.y - wrist_y
             rel_z = landmark.z - wrist_z
-            print(f"\nRELATIVE COORDS for {landmark}: {rel_x} {rel_y} {rel_z}")
-        
+
+            scaled_x = rel_x / scale
+            scaled_y = rel_y / scale
+            scaled_z = rel_z / scale
