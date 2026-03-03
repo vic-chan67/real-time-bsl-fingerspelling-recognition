@@ -41,9 +41,10 @@ if results.multi_hand_landmarks:
         middleTip = landmarks[12]
         middleTip_x, middleTip_y, middleTip_z = middleTip.x, middleTip.y, middleTip.z
         
-        # Normalisation
+        # 3D Euclidean distance (aka scale value)
         scale = math.sqrt((middleTip_x-wrist_x)**2 + (middleTip_y-wrist_y)**2 + (middleTip_z-wrist_z)**2)
 
+        # Normalisation
         for i, landmark in enumerate(landmarks):
             # Get all coords relative to WRIST
             rel_x = landmark.x - wrist_x
