@@ -5,7 +5,7 @@ import numpy as np
 import cv2  # opencv
 import mediapipe as mp
 import math
-from landmark_names import landmark_names
+# from landmark_names import landmark_names
 
 # ../assets/woman_hands.jpg from https://storage.googleapis.com/mediapipe-tasks/hand_landmarker/woman_hands.jpg
 image = cv2.imread('/Users/dev/Documents/real-time-bsl-fingerspelling-recognition/assets/woman_hands.jpg')
@@ -34,7 +34,6 @@ feature_vector = []
 # Draw hand landmarks
 if results.multi_hand_landmarks:
     for hand_landmarks in results.multi_hand_landmarks:
-        mp_draw.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
         landmarks = hand_landmarks.landmark
 
