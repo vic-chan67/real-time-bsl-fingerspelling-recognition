@@ -28,6 +28,8 @@ hands = mp_hands.Hands(
 
 results = hands.process(image1)
 
+feature_vector = []
+
 # Draw hand landmarks
 if results.multi_hand_landmarks:
     for hand_landmarks in results.multi_hand_landmarks:
@@ -54,3 +56,12 @@ if results.multi_hand_landmarks:
             scaled_x = rel_x / scale
             scaled_y = rel_y / scale
             scaled_z = rel_z / scale
+
+            feature_vector.append(scaled_x)
+            feature_vector.append(scaled_y)
+            feature_vector.append(scaled_z)
+    
+    # Check feature vector length:
+    # 21 landmarks * 3 coords * 2 hands = 126 values
+    # 21 landmarks * 3 coords * 1 hand = 63 values
+    print(len(feature_vector))
