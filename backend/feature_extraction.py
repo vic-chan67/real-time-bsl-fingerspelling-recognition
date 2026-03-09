@@ -68,6 +68,12 @@ if results.multi_hand_landmarks:
             else:
                 left_hand_vector.extend([scaled_x, scaled_y, scaled_z])
 
+    # Deal with missing hand(s) coords
+    if len(right_hand_vector) == 0:
+        right_hand_vector = [0] * 63
+    if len(left_hand_vector) == 0:
+        left_hand_vector = [0] * 63
+
     # Combine both hands coords, makes sure the right hand is loaded first
     feature_vector = right_hand_vector + left_hand_vector
     
