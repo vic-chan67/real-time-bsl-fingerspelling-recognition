@@ -30,10 +30,15 @@ hands = mp_hands.Hands(
 results = hands.process(image1)
 
 feature_vector = []
+right_hand_vector = []
+left_hand_vector = []
 
 # Draw hand landmarks
 if results.multi_hand_landmarks:
-    for hand_landmarks in results.multi_hand_landmarks:
+    for i, hand_landmarks in enumerate(results.multi_hand_landmarks):
+
+        # Get hand label from mediapipe
+        hand_label = results.multi_handedness[i].classification[0].label   
 
         landmarks = hand_landmarks.landmark
 
@@ -57,11 +62,15 @@ if results.multi_hand_landmarks:
             scaled_y = rel_y / scale
             scaled_z = rel_z / scale
 
-            feature_vector.append(scaled_x)
-            feature_vector.append(scaled_y)
-            feature_vector.append(scaled_z)
+            # Save each hand's coords into it's own vector
+            if hand_label == 'Right':
+                right_hand_vector.extend(scaled_x, scaled_y, scaled_z)
+            else:
+                left_hand_vector.extend(scaled_x, scaled_y, scaled_z)
+
+    # Combine both hands coords, makes sure the right hand is loaded first
+    feature_vector = right_hand_vector + left_hand_vector
     
     # Check feature vector length:
     # 21 landmarks * 3 coords * 2 hands = 126 values
-    # 21 landmarks * 3 coords * 1 hand = 63 values
-    print(len(feature_vector))
+    # print(len(feature_vector))
