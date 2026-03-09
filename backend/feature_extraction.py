@@ -52,7 +52,7 @@ if results.multi_hand_landmarks:
         scale = math.sqrt((middleTip_x-wrist_x)**2 + (middleTip_y-wrist_y)**2 + (middleTip_z-wrist_z)**2)
 
         # Normalisation
-        for i, landmark in enumerate(landmarks):
+        for landmark in landmarks:
             # Get all coords relative to WRIST
             rel_x = landmark.x - wrist_x
             rel_y = landmark.y - wrist_y
@@ -64,9 +64,9 @@ if results.multi_hand_landmarks:
 
             # Save each hand's coords into it's own vector
             if hand_label == 'Right':
-                right_hand_vector.extend(scaled_x, scaled_y, scaled_z)
+                right_hand_vector.extend([scaled_x, scaled_y, scaled_z])
             else:
-                left_hand_vector.extend(scaled_x, scaled_y, scaled_z)
+                left_hand_vector.extend([scaled_x, scaled_y, scaled_z])
 
     # Combine both hands coords, makes sure the right hand is loaded first
     feature_vector = right_hand_vector + left_hand_vector
