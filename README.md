@@ -15,7 +15,7 @@ The program is designed to be fully executable at any stage in the plan, whether
 - Phase 1:
   - Capture camera input ✅
   - Detect hand landmarks ✅
-  - Extract and visualise features
+  - Extract features ✅
 - Phase 2:
   - Build dataset
 - Phase 3:
