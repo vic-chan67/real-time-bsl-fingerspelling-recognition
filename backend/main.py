@@ -1,3 +1,6 @@
+# main.py
+# Full pipeline
+
 import numpy as np
 import cv2  # opencv
 import mediapipe as mp
