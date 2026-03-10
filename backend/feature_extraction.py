@@ -7,12 +7,14 @@ import mediapipe as mp
 import math
 # from landmark_names import landmark_names
 
-def extract_features(hands, image):
+def extract_features(hands, frame):
 
     # Define all feature vectors
     feature_vector = []
     right_hand_vector = []
     left_hand_vector = []
+
+    image = cv2.cvtColor(cv2.flip(frame, 1), cv2.COLOR_BGR2RGB)     # flip image and change colour from BGR to RGB
 
     results = hands.process(image)
 
