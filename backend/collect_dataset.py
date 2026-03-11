@@ -22,17 +22,20 @@ hands = mp_hands.Hands(
 # Open default camera (only change if more than one camera source)
 capture = cv2.VideoCapture(0)
 if not capture.isOpened():  # check camera open
-    print("Cannot open camera")
+    print('Cannot open camera')
     exit()
 
 while True:
     frameRead, frame = capture.read()
     if not frameRead:
-        print("Can't receive frame. Exiting...")
+        print('Can\'t receive frame. Exiting...')
         break
     
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)  # colour change back to BGR (openCV)
+    features = extract_features(hands, frame)
+    image = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)  # colour change back to BGR (openCV)
 
+    # Display
+    cv2.imshow('Camera', frame)
     if cv2.waitKey(1) == ord('q'):
         break
 
