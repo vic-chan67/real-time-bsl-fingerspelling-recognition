@@ -21,13 +21,13 @@ hands = mp_hands.Hands(
 # Open default camera (only change if more than one camera source)
 capture = cv2.VideoCapture(0)
 if not capture.isOpened():  # check camera open
-    print("Cannot open camera")
+    print('Cannot open camera')
     exit()
 
 while True:
     frameRead, frame = capture.read()
     if not frameRead:
-        print("Can't receive frame. Exiting...")
+        print('Cannot receive frame. Exiting...')
         break
     
     # Preprocessing:
