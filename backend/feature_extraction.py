@@ -64,7 +64,7 @@ if __name__ == '__main__':
     # ../assets/woman_hands.jpg from https://storage.googleapis.com/mediapipe-tasks/hand_landmarker/woman_hands.jpg
     image = cv2.imread('/Users/dev/Documents/real-time-bsl-fingerspelling-recognition/assets/woman_hands.jpg') 
     if image is None:
-        print("Image failed to load")
+        print('Image failed to load')
         quit()
     image1 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
