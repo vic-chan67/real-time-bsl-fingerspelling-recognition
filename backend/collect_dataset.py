@@ -4,6 +4,8 @@
 import numpy as np
 import cv2  # opencv
 import mediapipe as mp
+import csv
+import time
 from feature_extraction import extract_features
 
 # .hands: hand detection/tracking
@@ -19,6 +21,10 @@ hands = mp_hands.Hands(
     min_tracking_confidence=0.5
 )
 
+# Dataset creation/addition
+dataset_file = open('raw_dataset.csv', 'a', newline='')
+writer = csv.writer(dataset_file)
+
 # Open default camera (only change if more than one camera source)
 capture = cv2.VideoCapture(0)
 if not capture.isOpened():  # check camera open
@@ -31,12 +37,25 @@ while True:
         print('Can\'t receive frame. Exiting...')
         break
     
-    features = extract_features(hands, frame)
     image = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)  # colour change back to BGR (openCV)
-
-    # Display
     cv2.imshow('Camera', frame)
-    if cv2.waitKey(1) == ord('q'):
+
+    key = cv2.waitKey(1) & 0xFF
+
+    # Tester block
+    if key == ord('a'):
+        print('2 SECOND DELAY')
+        time.sleep(2)
+        features = extract_features(hands, frame)
+        writer.writerow(['A'] + features)
+        print('A saved')
+    elif key == ord('b'):
+        print('2 SECOND DELAY')
+        time.sleep(2)
+        features = extract_features(hands, frame)
+        writer.writerow(['B'] + features)
+        print('B saved')
+    elif key == ord('j'):
         break
 
 capture.release()
