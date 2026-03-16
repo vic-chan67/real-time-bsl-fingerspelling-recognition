@@ -42,27 +42,11 @@ while True:
 
     key = cv2.waitKey(1) & 0xFF
 
-    # # Tester block
-    # if key == ord('a'):
-    #     print('2 SECOND DELAY')
-    #     time.sleep(2)
-    #     features = extract_features(hands, frame)
-    #     writer.writerow(['A'] + features)
-    #     print('A saved')
-    # elif key == ord('b'):
-    #     print('2 SECOND DELAY')
-    #     time.sleep(2)
-    #     features = extract_features(hands, frame)
-    #     writer.writerow(['B'] + features)
-    #     print('B saved')
-    # elif key == ord('j'):
-    #     break
-
     if ord('a') <= key <= ord('z'):
 
         # Don't record H or J yet
         if key == ord('h') or key == ord('j'):
-            print('EXITING')
+            print('H OR J PRESSED, EXITING')
             break
         
         label = chr(key).upper()
